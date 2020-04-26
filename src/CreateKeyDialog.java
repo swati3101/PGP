@@ -1,0 +1,160 @@
+import javax.swing.*;
+
+import javax.swing.border.TitledBorder;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class CreateKeyDialog {
+	private JDialog mydialog;
+	
+	JTextField uname;
+	 JTextField emailId;
+	 JPasswordField pass;
+	 JPasswordField passAgain;
+	public void createPanel() {
+
+		 JPanel panel = new JPanel();
+
+		String title = "Create Keys";
+		TitledBorder border = BorderFactory.createTitledBorder(title);
+		panel.setBorder(border);
+		 panel.setLayout(new GridBagLayout());
+		 GridBagConstraints constraints = new GridBagConstraints();
+	        constraints.anchor = GridBagConstraints.CENTER;
+	        constraints.insets = new Insets(10, 10, 10, 10);
+	           
+	        panel.setSize(new Dimension(400,100));
+	        JLabel username = new JLabel("Username");
+	        JLabel email = new JLabel("Email");
+	        JLabel passphrase = new JLabel("Passphrase");
+	        JLabel passphraseAgain = new JLabel("Re-enter Passphrase");
+	        
+	        JButton create = new JButton("Create");
+	        JButton cancel = new JButton("Cancel");
+	        
+	        uname = new JTextField();
+	        uname.setMinimumSize(new Dimension(200,20));
+	        emailId = new JTextField(40);
+	        emailId.setMinimumSize(new Dimension(200,20));
+	        pass = new JPasswordField(40);
+	        pass.setMinimumSize(new Dimension(200,20));
+	        passAgain = new JPasswordField(40);
+	        passAgain.setMinimumSize(new Dimension(200,20));
+	        
+	        constraints.gridx = 0;
+	        constraints.gridy = 0; 
+	        panel.add(username,constraints);
+	        constraints.gridx = 1;
+	        panel.add(uname,constraints);
+	        constraints.gridx = 0;
+	        constraints.gridy = 1; 
+	        panel.add(email,constraints);
+	        constraints.gridx = 1;
+	        panel.add(emailId,constraints);
+	        constraints.gridx = 0;
+	        constraints.gridy = 2;
+	        panel.add(passphrase,constraints);
+	        constraints.gridx = 1;
+	        panel.add(pass,constraints);
+	        constraints.gridx = 0;
+	        constraints.gridy = 3;
+	        panel.add(passphraseAgain,constraints);
+	        constraints.gridx = 1;
+	        panel.add(passAgain,constraints);
+	        constraints.gridx = 0;
+	        constraints.gridy = 4;
+	        panel.add(create,constraints);
+	        constraints.gridx = 1;        
+	        panel.add(cancel,constraints);
+	        
+
+	        panel.setVisible(true);
+	        mydialog=new JDialog();
+	        mydialog.add(panel);
+	        mydialog.setSize(400,300);
+	        mydialog.setLocationRelativeTo(null);
+	        mydialog.setVisible(true);
+	  
+	  //on create button click
+	        create.addActionListener(new ActionListener() {
+	            public void actionPerformed(ActionEvent e) {
+	            	String msg1="";
+	            	String msg2="";
+	            	String msg3="";
+	            	String msg4="";
+	            	String msg5="";
+	         
+	            	JDialog alert=new JDialog(mydialog,"Alert Message");
+	            	String u=uname.getText();
+	            	if(u.equals("")) {
+	            		msg1="Please enter username";
+	            	}
+	            	String eId=emailId.getText();
+	            	String EMAIL_PATTERN = 
+	            		    "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+	            		    + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+
+	            	if (!eId.matches(EMAIL_PATTERN)) {
+	            		msg2="Please enter a valid email Id";
+	            		}
+		            if(eId.equals("")) {
+	            		msg2="Please enter your email Id";
+	            	}
+		            String p1=String.valueOf(pass.getPassword());
+		            if(p1.equals("")) {
+	            		msg3="Please enter password";
+	            	}
+	            	String p2=String.valueOf(passAgain.getPassword());
+	            	if(p2.equals("")) {
+	            		msg4="Please re-enter your password";
+	            	}
+		            
+	            	if(!(p1.equals(p2))) {
+	                	msg5="Passwords do not match";
+	                	//System.out.println(p1+" "+p2);
+	                	
+	                }
+	            	if(!(msg1.equals("")) || !(msg2.equals("")) || !(msg3.equals("")) || !(msg4.equals("")) || !(msg5.equals("")) )
+		            {	
+	            		JLabel l=new JLabel("<html>"+msg1+"<br/>"+msg2+"<br/>"+msg3+"<br/>"+msg4+"<br/>"+msg5+"</html>");
+	                	l.setHorizontalAlignment(JLabel.CENTER);
+	                	l.setVerticalTextPosition(JLabel.BOTTOM);
+	                	l.setHorizontalTextPosition(JLabel.CENTER);
+	                	alert.add(l);
+	                	alert.setSize(300,200);
+	        	        alert.setLocationRelativeTo(null);
+	        	        alert.setVisible(true);
+	            	}
+	            	else {
+	            		
+	            		int input = JOptionPane.showConfirmDialog(null,
+	                            "<html>This information will be published to key server<br/>Are you sure you want to send the information to the key server?</html>", "Warning!",JOptionPane.YES_NO_CANCEL_OPTION);
+	            		if(input==0) {
+	            			mydialog.dispose();
+	            			KeyGenService k=new KeyGenService();
+	               
+			                try {
+								k.generateKey(u,eId,p1);
+							} catch (Exception e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
+	            		}
+	            		mydialog.dispose();
+	            		
+	            	}
+	           }
+	         });
+	        
+	        cancel.addActionListener(new ActionListener() {
+	            public void actionPerformed(ActionEvent e) {
+	            	mydialog.dispose();
+	            }
+	         });
+	      
+	        
+	}
+
+
+}
