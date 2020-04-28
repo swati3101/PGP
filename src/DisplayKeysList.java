@@ -1,5 +1,6 @@
 import java.awt.*;
 
+
 import javax.swing.*;
 import javax.swing.table.*;
 
@@ -14,11 +15,26 @@ public class DisplayKeysList {
 	private JDialog mydialog;
 	private JTable table;
 		
-	public void showKeyslist() throws Exception {
+		public void showKeyslist() throws Exception {
 		KeyStore ks = new KeyStore("src/KeyFiles/pgp_KeyStore.keystore", "keystore_password");
 		
 		DefaultTableModel model = new DefaultTableModel(new String[]{"USER", "KEY ID", "ALGORITHM","KEY TYPE","PUBLIC KEY FILE"}, 0);
-		table=new JTable();
+		table=new JTable() {
+			 @Override
+			    public Component prepareRenderer(TableCellRenderer renderer, int row, int col) {
+			        Component comp = super.prepareRenderer(renderer, row, col);
+			        Object value = getModel().getValueAt(row, col);
+			            if (value.equals(false)) {
+			                comp.setBackground(Color.red);
+			            } else if (value.equals(true)) {
+			                comp.setBackground(Color.green);
+			            } else {
+			                comp.setBackground(Color.white);
+			            }
+			        
+			        return comp;
+			    
+		}};
 		KeyPairInformation[] keys = ks.getKeys();
 		for(KeyPairInformation key: keys){
 			String user=key.getUserID();
@@ -36,16 +52,23 @@ public class DisplayKeysList {
 			}else {
 				pub_Key="Click here to export";
 			}
+			
 			model.addRow(new Object[]{user, keyId, keyAlgo, keyType, pub_Key});
+			
 		}
 		
 		table.setModel(model);
+		
+		
+		 table.getTableHeader().setFont(new Font("SansSerif", Font.BOLD, 12));
+		  
 		table.addMouseListener(new java.awt.event.MouseAdapter(){
 			 public void mouseClicked(java.awt.event.MouseEvent e){
 					int row=table.rowAtPoint(e.getPoint());
 					int col= table.columnAtPoint(e.getPoint());
 					String user=table.getValueAt(row,0).toString();
-					   if(col==4) {
+					String status=table.getValueAt(row,4).toString();
+					   if(col==4 && status.equals("Click here to export")) {
 						   try {
 							   JFileChooser j = new JFileChooser(new File("C:/Users/saura/eclipse-workspace/Gui-PGP-Gui/src/KeyFiles/")); 
 							   j.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
@@ -84,6 +107,8 @@ public class DisplayKeysList {
       
 
 	}
-	
+		
+
+
 
 }

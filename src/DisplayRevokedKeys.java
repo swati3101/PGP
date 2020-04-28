@@ -1,4 +1,5 @@
 import java.awt.BorderLayout;
+import java.awt.Font;
 import java.io.IOException;
 
 import javax.swing.BorderFactory;
@@ -34,8 +35,9 @@ public class DisplayRevokedKeys {
 				model.addRow(new Object[]{user, keyId, pub_Key});
 				}
 			}
-			
+
 			table.setModel(model);
+			table.getTableHeader().setFont(new Font("SansSerif", Font.BOLD, 12));
 			
 			table.addMouseListener(new java.awt.event.MouseAdapter(){
 				 public void mouseClicked(java.awt.event.MouseEvent e){
@@ -67,7 +69,7 @@ public class DisplayRevokedKeys {
 	        panel.setLayout(new BorderLayout());
 	        JScrollPane tableContainer = new JScrollPane(table);
 	        panel.setBorder(BorderFactory.createTitledBorder(
-	        	      BorderFactory.createEtchedBorder(), "LIST OF USERS WHOSE KEYS ARE REVOKED", TitledBorder.CENTER,
+	        	      BorderFactory.createEtchedBorder(), "REVOKED KEYS", TitledBorder.CENTER,
 	        	      TitledBorder.TOP));
 	        	      
 	        panel.add(tableContainer, BorderLayout.CENTER);

@@ -1,0 +1,12 @@
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+Version: BCPG v1.59
+
+iQE5BCABAgAjBQJepqZbHB0DVGhpcyBrZXkgaXMgbm8gbG9uZ2VyIHVzZWQACgkQ
+1x9MuXzSYlfoyQgAihVZPZZdcK0YedyDu97GsSndqDgmRPWGxb8xobBjTx8OtC05
+U49npXIKTKZNi2pon/sz4nsDnjci5yrZAbjUYzFgR7+RLixXsaILcYn4bUlUvHya
+MlFYpaSYT9QDT/Nwscs6jZ7KDQfKwf6b2cd4mO0W4maen1duRFmrmLgwNuTXOZab
++TheAcz1mWcGlzNsnxUMrVS3fzZTca3Tg/htdu2cNUbjrW+p9eiD1MvlYg0Sccnu
+rtU+sI0NVaqm31SDizWsktjlKEz/C6cDY2qeplc/8H53+eP3NNZJK7UZBt4rmKDn
+Mzv6uhc4i1Uxll9Htw1UjgRzfRhWvajVc+2TMA==
+=/Eca
+-----END PGP PUBLIC KEY BLOCK-----
