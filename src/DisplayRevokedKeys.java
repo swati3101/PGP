@@ -19,6 +19,7 @@ import com.didisoft.pgp.exceptions.NoPublicKeyFoundException;
 
 
 public class DisplayRevokedKeys {	
+		LocalPath l;
 		public void showRevokedUsers() throws Exception {
 			
 			KeyStore ks = new KeyStore("src/KeyFiles/pgp_KeyStore.keystore", "keystore_password");
@@ -46,7 +47,7 @@ public class DisplayRevokedKeys {
 						String user=table.getValueAt(row,0).toString();
 						   if(col==2) {
 							   try {
-								   String path="C:/Users/saura/eclipse-workspace/Gui-PGP-Gui/src/KeyFiles/pubKey_"+user+".asc";
+								   String path=l.localPath+"src/KeyFiles/pubKey_"+user+".asc";
 								   ks.exportPublicKey(path, user, true);
 								   int input = JOptionPane.showConfirmDialog(null,"<html>Public key file has been saved to this path:<br/>"+path+"<br/>The exported public key is revoked and can be distributed to other users in order to prevent its future usage</html>", "Message", JOptionPane.DEFAULT_OPTION);
 							   		} catch (NoPublicKeyFoundException | IOException e1) {

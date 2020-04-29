@@ -1,4 +1,6 @@
+import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.Font;
 
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
@@ -20,6 +22,8 @@ public class EncryptDialog extends JDialog {
 	private JTextField SourceTextField;
 	private JTextField TargetTextField;
 	private JTextField UidTextField;
+	Color color = new Color(63,96,124);
+	
 
 	/**
 	 * Launch the application.
@@ -58,7 +62,9 @@ public class EncryptDialog extends JDialog {
 		getContentPane().add(TargetTextField);
 		TargetTextField.setColumns(10);
 		
-		JLabel UseridLabel = new JLabel("Recipient UserId");
+		JLabel UseridLabel = new JLabel("Recipient UserId :");
+		Font  f2  = new Font(Font.SERIF,  Font.BOLD, 15);
+		UseridLabel.setFont(f2);
 		UseridLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		UseridLabel.setBounds(30, 143, 119, 20);
 		getContentPane().add(UseridLabel);
@@ -75,6 +81,8 @@ public class EncryptDialog extends JDialog {
 		
 		
 		JButton SourceButton = new JButton("Source File");
+		SourceButton.setBackground(Color.lightGray);
+		//SourceButton.setForeground(Color.WHITE);
 		SourceButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JFileChooser jFileChooser = new JFileChooser();
@@ -93,6 +101,8 @@ public class EncryptDialog extends JDialog {
 		getContentPane().add(SourceButton);
 		
 		JButton TargetButton = new JButton("Target Directory");
+		TargetButton.setBackground(Color.lightGray);
+		//TargetButton.setForeground(Color.WHITE);
 		TargetButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -115,6 +125,8 @@ public class EncryptDialog extends JDialog {
 		
 		
 		JButton EncryptionButton = new JButton("Encrypt");
+		EncryptionButton.setBackground(color);
+		EncryptionButton.setForeground(Color.WHITE);
 		EncryptionButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				

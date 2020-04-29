@@ -1,9 +1,13 @@
+import javax.imageio.ImageIO;
 import javax.swing.*;
 
 import javax.swing.border.TitledBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 public class CreateKeyDialog {
 	private JDialog mydialog;
@@ -12,28 +16,64 @@ public class CreateKeyDialog {
 	 JTextField emailId;
 	 JPasswordField pass;
 	 JPasswordField passAgain;
+	 Color color = new Color(63,96,124);
+	 Font  f2  = new Font(Font.SERIF,  Font.BOLD, 16);
+	    
+		
 	public void createPanel() {
 
 		 JPanel panel = new JPanel();
 
-		String title = "Create Keys";
+		String title = "CREATE KEYS";
 		TitledBorder border = BorderFactory.createTitledBorder(title);
 		panel.setBorder(border);
+//		 BufferedImage myPicture = null;
+//			try {
+//				myPicture = ImageIO.read(new File("src/icons/createKeys-removebg-preview.png"));
+//			} catch (IOException e1) {
+//				// TODO Auto-generated catch block
+//				e1.printStackTrace();
+//			}
+	           
+		  JLabel picLabel = new JLabel(new ImageIcon("src/icons/createKeys.png"));
+          picLabel.setBounds(100, 20, 700, 350);
+     
+	           Font  f3  = new Font(Font.SERIF,  Font.BOLD, 17);
+	           JLabel msg = new JLabel("\"REMEMBER TO KEEP YOUR KEYS SAFE\"");
+		       msg.setForeground(color);
+		       msg.setBounds(400, 50, 200, 30);;
+	           msg.setFont(f3);
+	              
+		       
+		        panel.setSize(new Dimension(770,570));
+		    	panel.setBackground(Color.WHITE);	      
 		 panel.setLayout(new GridBagLayout());
 		 GridBagConstraints constraints = new GridBagConstraints();
-	        constraints.anchor = GridBagConstraints.CENTER;
+	        constraints.anchor = GridBagConstraints.NORTH;
 	        constraints.insets = new Insets(10, 10, 10, 10);
 	           
-	        panel.setSize(new Dimension(400,100));
 	        JLabel username = new JLabel("Username");
+	        username.setFont(f2);
 	        JLabel email = new JLabel("Email");
+	        email.setFont(f2);
 	        JLabel passphrase = new JLabel("Passphrase");
+	        passphrase.setFont(f2);
 	        JLabel passphraseAgain = new JLabel("Re-enter Passphrase");
+	        passphraseAgain.setFont(f2);
 	        
 	        JButton create = new JButton("Create");
+	        create.setSize(70, 20);
+	        create.setBackground(color);
+	        create.setForeground(Color.WHITE);
 	        JButton cancel = new JButton("Cancel");
+	        cancel.setBackground(color);
+	        cancel.setForeground(Color.WHITE);
+	        cancel.setSize(70, 20);
+	        
+	           
 	        
 	        uname = new JTextField();
+	        //uname.setSize(200, 30);
 	        uname.setMinimumSize(new Dimension(200,20));
 	        emailId = new JTextField(40);
 	        emailId.setMinimumSize(new Dimension(200,20));
@@ -42,28 +82,42 @@ public class CreateKeyDialog {
 	        passAgain = new JPasswordField(40);
 	        passAgain.setMinimumSize(new Dimension(200,20));
 	        
+	        
 	        constraints.gridx = 0;
 	        constraints.gridy = 0; 
-	        panel.add(username,constraints);
+	        panel.add(msg);
 	        constraints.gridx = 1;
-	        panel.add(uname,constraints);
+	        constraints.gridy = 0; 
+	        panel.add(picLabel);
+		       
 	        constraints.gridx = 0;
-	        constraints.gridy = 1; 
-	        panel.add(email,constraints);
+	        constraints.gridy = 1;   
+	        panel.add(username,constraints);
+	        
 	        constraints.gridx = 1;
-	        panel.add(emailId,constraints);
+	        constraints.gridy = 1; 
+	        
+	        panel.add(uname,constraints);
+	        
 	        constraints.gridx = 0;
 	        constraints.gridy = 2;
-	        panel.add(passphrase,constraints);
+	        panel.add(email,constraints);
 	        constraints.gridx = 1;
-	        panel.add(pass,constraints);
+	        constraints.gridy = 2;
+	        panel.add(emailId,constraints);
 	        constraints.gridx = 0;
 	        constraints.gridy = 3;
+	        panel.add(passphrase,constraints);
+	        constraints.gridx = 1;
+	        constraints.gridy = 3;
+	        panel.add(pass,constraints);
+	        constraints.gridx = 0;
+	        constraints.gridy = 4;
 	        panel.add(passphraseAgain,constraints);
 	        constraints.gridx = 1;
 	        panel.add(passAgain,constraints);
 	        constraints.gridx = 0;
-	        constraints.gridy = 4;
+	        constraints.gridy = 5;
 	        panel.add(create,constraints);
 	        constraints.gridx = 1;        
 	        panel.add(cancel,constraints);
@@ -72,7 +126,7 @@ public class CreateKeyDialog {
 	        panel.setVisible(true);
 	        mydialog=new JDialog();
 	        mydialog.add(panel);
-	        mydialog.setSize(400,300);
+	        mydialog.setSize(600,500);
 	        mydialog.setLocationRelativeTo(null);
 	        mydialog.setVisible(true);
 	  

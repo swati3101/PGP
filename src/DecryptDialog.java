@@ -1,4 +1,6 @@
+import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.Font;
 
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
@@ -24,6 +26,7 @@ public class DecryptDialog extends JDialog {
 	private JTextField SourceTextField;
 	private JTextField TargetTextField;
 	private JPasswordField PassKeyField;
+	Color color = new Color(63,96,124);
 
 	/**
 	 * Launch the application.
@@ -64,7 +67,9 @@ public class DecryptDialog extends JDialog {
 		PassKeyField.setBounds(183, 126, 241, 23);
 		getContentPane().add(PassKeyField);
 		
-		JLabel PasskeyLabel = new JLabel("Pass Key");
+		Font  f2  = new Font(Font.SERIF,  Font.BOLD, 15);
+		JLabel PasskeyLabel = new JLabel("Password : ");
+		PasskeyLabel.setFont(f2);
 		PasskeyLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		PasskeyLabel.setBounds(45, 130, 89, 14);
 		getContentPane().add(PasskeyLabel);
@@ -75,6 +80,7 @@ public class DecryptDialog extends JDialog {
 		getContentPane().add(DecryptMsgLabel);
 		
 		JButton SourceButton = new JButton("Source File");
+		SourceButton.setBackground(Color.lightGray);
 		SourceButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -96,6 +102,8 @@ public class DecryptDialog extends JDialog {
 		getContentPane().add(SourceButton);
 		
 		JButton TargetButton = new JButton("Target Directory");
+		TargetButton.setBackground(Color.lightGray);
+		//TargetButton.setForeground(Color.WHITE);
 		TargetButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -118,6 +126,8 @@ public class DecryptDialog extends JDialog {
 		
 		
 		JButton DecryptButton = new JButton("Decrypt");
+		DecryptButton.setBackground(color);
+		DecryptButton.setForeground(Color.WHITE);
 		DecryptButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				

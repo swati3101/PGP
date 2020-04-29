@@ -6,7 +6,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -35,6 +34,7 @@ public class DigitalSignatureDialog extends javax.swing.JDialog {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
         jButton2 = new javax.swing.JButton();
         inputFile = new javax.swing.JFileChooser();
@@ -45,14 +45,20 @@ public class DigitalSignatureDialog extends javax.swing.JDialog {
         password = new javax.swing.JLabel();
         Sign = new javax.swing.JButton();
         Verify = new javax.swing.JButton();
+        errorMsg = new javax.swing.JLabel();
+        errorPassword = new javax.swing.JLabel();
+        errorFile = new javax.swing.JLabel();
 
         jButton2.setText("jButton2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        inputFile.setToolTipText("");
         inputFile.setName(""); // NOI18N
         inputFile.setSelectedFiles(null);
+
+        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, fileSelection, org.jdesktop.beansbinding.ELProperty.create("<html>Select file to sign or <br>verify and click open</html>"), inputFile, org.jdesktop.beansbinding.BeanProperty.create("toolTipText"));
+        bindingGroup.addBinding(binding);
+
         inputFile.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 inputFileActionPerformed(evt);
@@ -63,18 +69,34 @@ public class DigitalSignatureDialog extends javax.swing.JDialog {
         fileSelection.setLabelFor(inputFile);
         fileSelection.setText("Select File to Sign");
 
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, Password, org.jdesktop.beansbinding.ELProperty.create("<html>Enter password</html>"), Password, org.jdesktop.beansbinding.BeanProperty.create("toolTipText"));
+        bindingGroup.addBinding(binding);
+
         Password.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 PasswordActionPerformed(evt);
+            }
+        });
+        Password.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                PasswordKeyTyped(evt);
             }
         });
 
         usernameInput.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         usernameInput.setText("Username");
 
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, userName, org.jdesktop.beansbinding.ELProperty.create("<html>Enter username</html>"), userName, org.jdesktop.beansbinding.BeanProperty.create("toolTipText"));
+        bindingGroup.addBinding(binding);
+
         userName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 userNameActionPerformed(evt);
+            }
+        });
+        userName.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                userNameKeyTyped(evt);
             }
         });
 
@@ -82,6 +104,10 @@ public class DigitalSignatureDialog extends javax.swing.JDialog {
         password.setText("Password");
 
         Sign.setText("Sign");
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, Sign, org.jdesktop.beansbinding.ELProperty.create("<html>ensure source authenticity<br>encrypt for data confidentiality</html>"), Sign, org.jdesktop.beansbinding.BeanProperty.create("toolTipText"));
+        bindingGroup.addBinding(binding);
+
         Sign.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 SignActionPerformed(evt);
@@ -89,11 +115,30 @@ public class DigitalSignatureDialog extends javax.swing.JDialog {
         });
 
         Verify.setText("Verify");
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, Verify, org.jdesktop.beansbinding.ELProperty.create("<html>Verify source authenticity</html>"), Verify, org.jdesktop.beansbinding.BeanProperty.create("toolTipText"));
+        bindingGroup.addBinding(binding);
+
         Verify.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 VerifyActionPerformed(evt);
             }
         });
+
+        errorMsg.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        errorMsg.setForeground(new java.awt.Color(255, 0, 0));
+        errorMsg.setText("Enter username!");
+        errorMsg.setToolTipText("");
+
+        errorPassword.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        errorPassword.setForeground(new java.awt.Color(255, 0, 0));
+        errorPassword.setText("Enter password!");
+        errorPassword.setToolTipText("");
+
+        errorFile.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        errorFile.setForeground(new java.awt.Color(255, 0, 0));
+        errorFile.setText("No selection made (press open after selecting file)");
+        errorFile.setToolTipText("");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -104,13 +149,21 @@ public class DigitalSignatureDialog extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(fileSelection)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(errorFile)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(inputFile, javax.swing.GroupLayout.PREFERRED_SIZE, 550, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(usernameInput)
-                            .addComponent(password, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(usernameInput)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(errorMsg))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(password, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(errorPassword))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(3, 3, 3)
                                 .addComponent(Verify, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -124,7 +177,9 @@ public class DigitalSignatureDialog extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(9, 9, 9)
-                .addComponent(fileSelection, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(fileSelection, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(errorFile))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -132,11 +187,15 @@ public class DigitalSignatureDialog extends javax.swing.JDialog {
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(59, 59, 59)
-                        .addComponent(usernameInput, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(usernameInput, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(errorMsg))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(userName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(password, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(password, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(errorPassword))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(Password, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(32, 32, 32)
@@ -146,15 +205,22 @@ public class DigitalSignatureDialog extends javax.swing.JDialog {
                         .addGap(92, 92, 92))))
         );
 
+        errorMsg.setVisible(false);
+        errorPassword.setVisible(false);
+        errorFile.setVisible(false);
+
+        bindingGroup.bind();
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void userNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userNameActionPerformed
         // TODO add your handling code here:
-        /*if (userName.getText() != null) {
-            dgsig.setUsername(userName.getText());
-            System.out.println(userName.getText());
-        }*/
+        if (userName.getText() != null || !"".equals(userName.getText())) {
+            /*dgsig.setUsername(userName.getText());
+            System.out.println(userName.getText());*/
+            errorMsg.setVisible(false);
+        }
     }//GEN-LAST:event_userNameActionPerformed
 
     private void PasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PasswordActionPerformed
@@ -168,11 +234,15 @@ public class DigitalSignatureDialog extends javax.swing.JDialog {
     private void SignActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SignActionPerformed
         // TODO add your handling code here:
         if ( "".equals(userName.getText()) || userName.getText() == null) {
-            JOptionPane.showMessageDialog(new JFrame(), "Enter your username!");
+            //JOptionPane.showMessageDialog(new JFrame(), "Enter your username!");
+            errorMsg.setVisible(true);
         } else if (Password.getPassword() == null || "".equals(Password.getText()) ) {
-            JOptionPane.showMessageDialog(new JFrame(), "Enter password!");
-        } else if (inputFile.getSelectedFile() == null) {
-            JOptionPane.showMessageDialog(new JFrame(), "Select file to digitally sign!");
+            //JOptionPane.showMessageDialog(new JFrame(), "Enter password!");
+            errorPassword.setText("Enter password!");
+            errorPassword.setVisible(true);
+        } else if (inputFile.getSelectedFile() == null || !"".equals(inputFile.getSelectedFile().getAbsolutePath())) {
+            //JOptionPane.showMessageDialog(new JFrame(), "Select file to digitally sign!");
+            errorFile.setVisible(true);
         } else {
             dgsig.setUsername(userName.getText());
             System.out.println(userName.getText());
@@ -184,7 +254,10 @@ public class DigitalSignatureDialog extends javax.swing.JDialog {
                 dgsig.signFile();
             } catch (WrongPasswordException ex) {
                 Logger.getLogger(DigitalSignatureDialog.class.getName()).log(Level.SEVERE, null, ex);
-                JOptionPane.showMessageDialog(new JFrame(), "Incorrect Password");
+                //JOptionPane.showMessageDialog(new JFrame(), "Incorrect Password");
+                errorPassword.setText("Enter password!");
+                errorPassword.setVisible(true);
+                
             } catch (IOException ex) {
                 Logger.getLogger(DigitalSignatureDialog.class.getName()).log(Level.SEVERE, null, ex);
                 JOptionPane.showMessageDialog(new JFrame(), "Could find file");
@@ -202,12 +275,16 @@ public class DigitalSignatureDialog extends javax.swing.JDialog {
 
     private void VerifyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VerifyActionPerformed
         // TODO add your handling code here:
-        if (userName.getText() == null) {
-            JOptionPane.showMessageDialog(new JFrame(), "Enter username of signing party!");
-        } else if (Password.getPassword() == null) {
-            JOptionPane.showMessageDialog(new JFrame(), "Enter your password!");
-        } else if (inputFile.getSelectedFile() == null) {
-            JOptionPane.showMessageDialog(new JFrame(), "Select file to digitally sign!");
+        if ( "".equals(userName.getText()) || userName.getText() == null) {
+            //JOptionPane.showMessageDialog(new JFrame(), "Enter your username!");
+            errorMsg.setVisible(true);
+        } else if (Password.getPassword() == null || "".equals(Password.getText()) ) {
+            //JOptionPane.showMessageDialog(new JFrame(), "Enter password!");
+            errorPassword.setText("Enter password!");
+            errorPassword.setVisible(true);
+        } else if (inputFile.getSelectedFile() == null || !"".equals(inputFile.getSelectedFile().getAbsolutePath())) {
+            //JOptionPane.showMessageDialog(new JFrame(), "Select file to digitally sign!");
+            errorFile.setVisible(true);
         } else {
             dgsig.setUsername(userName.getText());
             System.out.println(userName.getText());
@@ -233,21 +310,42 @@ public class DigitalSignatureDialog extends javax.swing.JDialog {
         if (inputFile.getSelectedFile().getAbsoluteFile() != null) {
             dgsig.setInputDoc(inputFile.getSelectedFile().getAbsolutePath());
             System.out.println("file selected : " + inputFile.getSelectedFile().getAbsolutePath());
+            errorFile.setVisible(false);
         }
     }//GEN-LAST:event_inputFileActionPerformed
 
+    private void userNameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_userNameKeyTyped
+        // TODO add your handling code here:
+        if (userName.getText() != null || !"".equals(userName.getText()) || !" ".equals(userName.getText())) {
+            /*dgsig.setUsername(userName.getText());
+            System.out.println(userName.getText());*/
+            errorMsg.setVisible(false);
+        }
+    }//GEN-LAST:event_userNameKeyTyped
+
+    private void PasswordKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_PasswordKeyTyped
+        // TODO add your handling code here:
+        if(Password.getPassword()!=null){
+            errorPassword.setVisible(false);
+        }
+    }//GEN-LAST:event_PasswordKeyTyped
+
     //data variables
-    DigitalSignature dgsig;
+    private DigitalSignature dgsig;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPasswordField Password;
     private javax.swing.JButton Sign;
     private javax.swing.JButton Verify;
+    private javax.swing.JLabel errorFile;
+    private javax.swing.JLabel errorMsg;
+    private javax.swing.JLabel errorPassword;
     private javax.swing.JLabel fileSelection;
     private javax.swing.JFileChooser inputFile;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel password;
     private javax.swing.JTextField userName;
     private javax.swing.JLabel usernameInput;
+    private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 }

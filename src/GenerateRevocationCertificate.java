@@ -5,6 +5,7 @@ import javax.swing.*;
 
 
 public class GenerateRevocationCertificate {
+	LocalPath l;
 	public void revocationCertiGen(String uId, String pass) throws Exception {
 		KeyStore ks = new KeyStore("src/KeyFiles/pgp_KeyStore.keystore", "keystore_password");
 		int f=0;
@@ -41,7 +42,7 @@ public class GenerateRevocationCertificate {
                                             revocationCode, 
                                             revocationDescription, 
                                             certificateOutputFile); 
-        String path="C:/Users/saura/eclipse-workspace/Gui-PGP-Gui/"+certificateOutputFile;
+        String path=l.localPath+certificateOutputFile;
         int input = JOptionPane.showConfirmDialog(null,
         
                 "<html>Your Revocation Certificate has been created and saved to this path:<br/>"+path+"</html>","Message", JOptionPane.DEFAULT_OPTION);

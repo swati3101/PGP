@@ -123,40 +123,55 @@ class MyFrame extends JFrame {
     setIconImage(logo.getImage());
     
     getContentPane().setBackground(Color.WHITE);
-    
+    getRootPane().setBorder(BorderFactory.createMatteBorder(3,3,3,3,Color.darkGray));
     setSize(width,height);
     setLocation(new Point(300,200));
     setLayout(null);    
     setResizable(false);
    
     JMenuBar mb = new JMenuBar();
-    mb.setBackground(Color.WHITE);
+    mb.setBackground(color);
+   // mb.setForeground(Color.WHITE);
     JMenu menu1 = new JMenu("PGP Tool");
+    menu1.setForeground(Color.WHITE);
     JMenu menu2 = new JMenu("Keys");
+    menu2.setForeground(Color.WHITE);
     
     revocationCertiGen =  new JMenuItem(new AbstractAction("Generate Revocation Certificate") {
         public void actionPerformed(ActionEvent e) {
         	JPanel panel=new JPanel();
-    		String title = "Generate Revocation Certificate";
+        	panel.setSize(800, 500);
+    		String title = "GENERATE REVOCATION CERTIFICATE";
     		TitledBorder b = BorderFactory.createTitledBorder(title);
     		panel.setBorder(b);
+    	    Font  f2  = new Font(Font.SERIF,  Font.BOLD, 15);
+    	    
     		JLabel desc1=new JLabel("A lost passphrase or private key could cause you a problem. Generate a key revocation certificate now to avoid this.");  
     		JLabel desc2=new JLabel("You might forget the passphrase to your private key. Without the passphrase, you can't access your private key and decrypt");  
+    		desc1.setFont(f2);
+    		desc2.setFont(f2);
     		JLabel desc3=new JLabel("email and files sent to you, thus making your key worthless. Moreover, without the passphrase, you can't even revoke the");
-    		JLabel desc4=new JLabel("key to let people know <br/>that they shouldn't use that public key when encrypting messages and files to you. A  key ");
+    		desc3.setFont(f2);
+    		JLabel desc4=new JLabel("key to let people know that they shouldn't use that public key when encrypting messages and files to you. A  key ");
+    		desc4.setFont(f2);
     		JLabel desc5=new JLabel("revocation certificate is a special, revoked copy of your public key. You can generate a key revocation certificate and");
+    		desc5.setFont(f2);
     		JLabel desc6=new JLabel("store it for future use. Key revocation certificates are especially useful if you've forgotten the passphrase to your");
-    		JLabel desc7=new JLabel("private key and you need <br/>some way to \"disable\" or revoke that key. Since you've forgotten the passphrase or lost the");
-    		JLabel desc8=new JLabel("private key, the only way to revoke <br/>the key will be with a revocation certificate that you generated earlier.");
+    		desc6.setFont(f2);
+    		JLabel desc7=new JLabel("private key and you need some way to disable or revoke that key. Since you've forgotten the passphrase or lost the");
+    		desc7.setFont(f2);
+    		JLabel desc8=new JLabel("private key, the only way to revoke the key will be with a revocation certificate that you generated earlier.");
+    		desc8.setFont(f2);
     		panel.setVisible(true);
            BufferedImage myPicture = null;
 		try {
-			myPicture = ImageIO.read(new File("src/icons/certi.png"));
+			myPicture = ImageIO.read(new File("src/icons/Certi.png"));
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
            JLabel picLabel = new JLabel(new ImageIcon(myPicture));
+           picLabel.setBounds(20, 20, 700, 350);
            add(picLabel);
            
            panel.add(picLabel);
@@ -168,12 +183,16 @@ class MyFrame extends JFrame {
            panel.add(desc6);
            panel.add(desc7);
            panel.add(desc8);
+           certiGen.setBackground(color);
+           certiGen.setForeground(Color.WHITE);
+           
            panel.add(certiGen);
+           panel.setBackground(Color.WHITE);
            
            
            JDialog myd=new JDialog();
            myd.add(panel);
-           myd.setSize(700,450);
+           myd.setSize(840,480);
            myd.setLocationRelativeTo(null);
            myd.setVisible(true);
            
@@ -183,6 +202,7 @@ class MyFrame extends JFrame {
     });
     
     
+
     
     exitf =  new JMenuItem(new AbstractAction("Exit") {
         public void actionPerformed(ActionEvent e) {
@@ -258,7 +278,7 @@ class MyFrame extends JFrame {
              gr.setColor(Color.GRAY);
              Graphics2D g2d=(Graphics2D) gr;
              g2d.drawRoundRect(10, 55, 410, 250,30,30);
-             g2d.drawRoundRect(430, 55, 410, 250,30,30);
+             g2d.drawRoundRect(430, 55, 407, 250,30,30);
              g2d.drawRoundRect(10, 310, 827, 280,30,30);
              
   }

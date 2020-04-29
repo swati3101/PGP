@@ -52,6 +52,11 @@ public class Begin extends JWindow {
         label1.setBounds(200, 70, 280, 30);
         panel.add(label1);
        
+        JLabel label2 = new JLabel("LET'S BEGIN");
+        label2.setFont(new Font("Verdana", Font.BOLD, 15));
+        label2.setForeground(color);
+        label2.setBounds(180, 100, 280, 30);
+        panel.add(label2);
         
         BufferedImage myPicture=null;
 		try {
@@ -82,9 +87,9 @@ public class Begin extends JWindow {
 
                 progressBar.setValue(count);
 
-                System.out.println(count);
+                //System.out.println(count);
 
-                if (count == 60) {
+                if (count == 20) {
 
                     createFrame();
 

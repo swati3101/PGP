@@ -3,6 +3,9 @@ import java.awt.*;
 
 import javax.swing.*;
 import javax.swing.table.*;
+import javax.swing.table.*;
+import javax.swing.table.DefaultTableCellRenderer;
+
 
 import com.didisoft.pgp.KeyStore;
 import com.didisoft.pgp.exceptions.NoPublicKeyFoundException;
@@ -11,12 +14,25 @@ import java.io.*;
 
 
 public class DisplayKeysList {
+	LocalPath l;
 	private File pubKeyFile; 
 	private JDialog mydialog;
 	private JTable table;
+	Color color = new Color(63,96,124);
+	Font  f2  = new Font(Font.SERIF,  Font.BOLD, 16);
+	 
 		
 		public void showKeyslist() throws Exception {
+			JMenu mb=new JMenu();
+			mb.setBackground(color);
 		KeyStore ks = new KeyStore("src/KeyFiles/pgp_KeyStore.keystore", "keystore_password");
+		
+		  JLabel picLabel = new JLabel(new ImageIcon("src/icons/userlist.png"));
+          picLabel.setBounds(100, 20, 700, 350);
+         
+          JLabel picLabel1 = new JLabel(new ImageIcon("src/icons/users.png"));
+          picLabel1.setBounds(100, 20, 700, 350);
+         
 		
 		DefaultTableModel model = new DefaultTableModel(new String[]{"USER", "KEY ID", "ALGORITHM","KEY TYPE","PUBLIC KEY FILE"}, 0);
 		table=new JTable() {
@@ -61,7 +77,7 @@ public class DisplayKeysList {
 		
 		
 		 table.getTableHeader().setFont(new Font("SansSerif", Font.BOLD, 12));
-		  
+		 
 		table.addMouseListener(new java.awt.event.MouseAdapter(){
 			 public void mouseClicked(java.awt.event.MouseEvent e){
 					int row=table.rowAtPoint(e.getPoint());
@@ -70,7 +86,7 @@ public class DisplayKeysList {
 					String status=table.getValueAt(row,4).toString();
 					   if(col==4 && status.equals("Click here to export")) {
 						   try {
-							   JFileChooser j = new JFileChooser(new File("C:/Users/saura/eclipse-workspace/Gui-PGP-Gui/src/KeyFiles/")); 
+							   JFileChooser j = new JFileChooser(new File(l.localPath+"src/KeyFiles/")); 
 							   j.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 							   j.showSaveDialog(null); 
 							   File fileToSave = j.getSelectedFile();
@@ -92,16 +108,25 @@ public class DisplayKeysList {
 	        col.setCellRenderer(dtcr);
 		}
 		table.setRowHeight(table.getRowHeight()+10);
+		table.setBackground(Color.WHITE);
+		
 
-
+		JLabel l=new JLabel("<html>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp ENCRYPT AND SEND CONFIDENTIAL DATA TO THESE USERS</html>");
+		l.setFont(f2);
+		l.setForeground(color);
 		JPanel panel = new JPanel();
         panel.setLayout(new BorderLayout());
+        panel.setBackground(Color.WHITE);
+        panel.add(l,BorderLayout.NORTH);              
+        panel.add(picLabel, BorderLayout.WEST);
+        panel.add(picLabel1, BorderLayout.EAST);
         JScrollPane tableContainer = new JScrollPane(table);
         panel.add(tableContainer, BorderLayout.CENTER);
         panel.setVisible(true);
         mydialog=new JDialog();
+        mydialog.setBackground(Color.WHITE);
         mydialog.add(panel);
-        mydialog.setSize(800,300);
+        mydialog.setSize(850,500);
         mydialog.setLocationRelativeTo(null);
         mydialog.setVisible(true);
       

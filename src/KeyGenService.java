@@ -13,6 +13,7 @@ import com.didisoft.pgp.*;
 
 
 public class KeyGenService {
+	LocalPath l;
 	public void generateKey(String uname, String emailId, String pass) throws Exception {
 		
 		// initialize the KeyStore where the key will be generated
@@ -58,7 +59,7 @@ public class KeyGenService {
 									cyphers);
 				    
 				    KeyPairInformation.SubKey[] subKeys = key.getPrivateSubKeys();
-				    JFileChooser j = new JFileChooser(new File("C:/Users/saura/eclipse-workspace/Gui-PGP-Gui/src/KeyFiles/")); 
+				    JFileChooser j = new JFileChooser(new File(l.localPath+"src/KeyFiles/")); 
 					   j.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 					   j.setDialogTitle("Select folder to save your keys");
 					   j.showSaveDialog(null); 

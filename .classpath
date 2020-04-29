@@ -9,5 +9,6 @@
 	<classpathentry kind="lib" path="C:/Users/saura/eclipse-workspace/bcpg-lw-jdk15on-1.59.jar"/>
 	<classpathentry kind="lib" path="C:/Users/saura/eclipse-workspace/bcprov-lw-jdk15on-1.59.jar"/>
 	<classpathentry kind="lib" path="C:/Users/saura/eclipse-workspace/pgplib-3.2.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/saura/eclipse-workspace/Gui-PGP-Gui/beansbinding-1.2.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
