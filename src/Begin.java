@@ -89,7 +89,7 @@ public class Begin extends JWindow {
 
                 //System.out.println(count);
 
-                if (count == 20) {
+                if (count == 50) {
 
                     createFrame();
 
