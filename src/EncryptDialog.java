@@ -1,6 +1,10 @@
 import java.awt.Color;
+import javax.imageio.ImageIO;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
@@ -8,6 +12,8 @@ import javax.swing.JFrame;
 
 import com.didisoft.pgp.*;
 
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
@@ -47,40 +53,63 @@ public class EncryptDialog extends JDialog {
 	 */
 	public EncryptDialog() {
 		setTitle("File Encryption");
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 600, 550);
 		getContentPane().setLayout(null);
+		
+		 //getContentPane().setLayout(new GridBagLayout());
+		 //GridBagConstraints constraints = new GridBagConstraints();
+	       // constraints.anchor = GridBagConstraints.NORTH;
+	       // constraints.insets = new Insets(10, 10, 10, 10);
+	      
 		
 		
 		
 		SourceTextField = new JTextField();
-		SourceTextField.setBounds(181, 30, 243, 22);
+		SourceTextField.setBounds(181, 30, 243, 30);
+		//constraints.gridx = 0;
+       // constraints.gridy = 0;
 		getContentPane().add(SourceTextField);
 		SourceTextField.setColumns(10);
 		
 		TargetTextField = new JTextField();
-		TargetTextField.setBounds(181, 85, 243, 23);
+		TargetTextField.setBounds(181, 85, 243, 30);
+		//constraints.gridx = 0;
+       // constraints.gridy = 1;
 		getContentPane().add(TargetTextField);
 		TargetTextField.setColumns(10);
 		
 		JLabel UseridLabel = new JLabel("Recipient UserId :");
-		Font  f2  = new Font(Font.SERIF,  Font.BOLD, 15);
+		Font  f2  = new Font(Font.SERIF,  Font.BOLD, 14);
 		UseridLabel.setFont(f2);
 		UseridLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		UseridLabel.setBounds(30, 143, 119, 20);
+		//constraints.gridx = 1;
+        //constraints.gridy = 1;
 		getContentPane().add(UseridLabel);
 		
 		UidTextField = new JTextField();
-		UidTextField.setBounds(181, 143, 243, 20);
+		UidTextField.setBounds(181, 143, 243, 30);
+		//constraints.gridx = 0;
+       // constraints.gridy = 2;
 		getContentPane().add(UidTextField);
 		UidTextField.setColumns(10);
 		
 		final JLabel EncryptMsgLabel = new JLabel("");
 		EncryptMsgLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		EncryptMsgLabel.setBounds(130, 187, 214, 22);
+		EncryptMsgLabel.setBounds(130, 187, 214, 30);
+		//constraints.gridx = 1;
+        //constraints.gridy = 2;
 		getContentPane().add(EncryptMsgLabel);
 		
+		 JLabel picLabel = new JLabel(new ImageIcon("src/icons/encryptimg.png"));
+         picLabel.setBounds(80, 180, 450, 380);
+         //constraints.gridx = 0;
+	     //constraints.gridy = 3; 
+	        getContentPane().add(picLabel);
 		
-		JButton SourceButton = new JButton("Source File");
+		Icon iconEn = new ImageIcon("src/icons/source.png");
+		
+		JButton SourceButton = new JButton("Source File",iconEn);
 		SourceButton.setBackground(Color.lightGray);
 		//SourceButton.setForeground(Color.WHITE);
 		SourceButton.addActionListener(new ActionListener() {
@@ -97,10 +126,12 @@ public class EncryptDialog extends JDialog {
 		        }
 			}
 		});
-		SourceButton.setBounds(36, 29, 130, 23);
+		SourceButton.setBounds(36, 29, 130, 30);
 		getContentPane().add(SourceButton);
 		
-		JButton TargetButton = new JButton("Target Directory");
+		Icon iconDec = new ImageIcon("src/icons/target.png");
+		
+		JButton TargetButton = new JButton("Target Directory", iconDec);
 		TargetButton.setBackground(Color.lightGray);
 		//TargetButton.setForeground(Color.WHITE);
 		TargetButton.addActionListener(new ActionListener() {
@@ -120,7 +151,7 @@ public class EncryptDialog extends JDialog {
 				
 			}
 		});
-		TargetButton.setBounds(36, 84, 130, 23);
+		TargetButton.setBounds(36, 84, 130, 30);
 		getContentPane().add(TargetButton);
 		
 		
